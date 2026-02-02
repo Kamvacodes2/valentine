@@ -133,6 +133,26 @@ p {
     overflow: visible;
 }
 
+.no-btn-tap {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    font: inherit;
+    line-height: 0;
+}
+.no-btn-tap:focus {
+    outline: none;
+}
+.no-btn-tap .no-btn {
+    display: block;
+    pointer-events: none;
+}
+
 .btn {
     width: 120px;
     cursor: pointer;
@@ -236,6 +256,11 @@ display: inline-block;
     .yes-btn,
     .no-btn {
         width: 100px;
+    }
+
+    .no-btn-tap {
+        min-width: 48px;
+        min-height: 48px;
     }
 
     .no-btn {

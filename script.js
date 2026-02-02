@@ -3,6 +3,7 @@ const envelope = document.getElementById("envelope-container");
 const envelopeTap = document.getElementById("envelope-tap");
 const letter = document.getElementById("letter-container");
 const noBtn = document.querySelector(".no-btn");
+const noBtnTap = document.getElementById("no-btn-tap");
 const noWrapper = document.querySelector(".no-wrapper");
 const yesBtn = document.querySelector(".btn[alt='Yes']");
 const letterWindow = document.querySelector(".letter-window");
@@ -27,15 +28,17 @@ function isMobile() {
 }
 
 function applyMobileBehavior() {
+    const el = noBtnTap || noBtn;
+    if (!el) return;
     if (isMobile()) {
-        noBtn.style.pointerEvents = "auto";
-        noBtn.style.cursor = "pointer";
-        noBtn.style.transform = "translate(0, 0)";
+        el.style.pointerEvents = "auto";
+        el.style.cursor = "pointer";
+        el.style.transform = "translate(0, 0)";
         noOffsetX = 0;
         noOffsetY = 0;
     } else {
-        noBtn.style.pointerEvents = "none";
-        noBtn.style.cursor = "default";
+        el.style.pointerEvents = "none";
+        el.style.cursor = "default";
     }
 }
 
@@ -73,18 +76,23 @@ const NO_DRIFT_MAX_STEP = 35;     // max drift per frame so it doesn't teleport
 const PADDING = 12;               // padding from letter window edge
 const YES_NO_GAP = 8;             // min gap between No and Yes so No can't touch/hide behind Yes
 
-noBtn.style.transformOrigin = "center center";
-noBtn.style.transition = "transform 0.12s ease-out";
-noBtn.style.pointerEvents = "none";   // No button cannot be clicked
+const noEl = noBtnTap || noBtn;
+if (noEl) {
+    noEl.style.transformOrigin = "center center";
+    noEl.style.transition = "transform 0.12s ease-out";
+    noEl.style.pointerEvents = "none";
+}
 
 document.addEventListener("mousemove", (e) => {
     if (isMobile()) return;
+    const el = noBtnTap || noBtn;
+    if (!el) return;
 
     const mouseX = e.clientX;
     const mouseY = e.clientY;
     const now = performance.now();
 
-    const rect = noBtn.getBoundingClientRect();
+    const rect = el.getBoundingClientRect();
     const noCenterX = rect.left + rect.width / 2;
     const noCenterY = rect.top + rect.height / 2;
 
@@ -144,7 +152,7 @@ document.addEventListener("mousemove", (e) => {
             noOffsetY = Math.max(minNoY, Math.min(maxNoY, noOffsetY));
         }
 
-        noBtn.style.transform = `translate(${noOffsetX}px, ${noOffsetY}px)`;
+        (noBtnTap || noBtn).style.transform = `translate(${noOffsetX}px, ${noOffsetY}px)`;
 
         growYesButton();
     }
@@ -170,6 +178,7 @@ function growYesButton() {
 }
 
 // Mobile only: No tapped/clicked → show "Sorry chommie" + evil_laugh.gif + date
+let noTapHandledAt = 0;
 function showNoOutcome() {
     if (!isMobile()) return;
     title.textContent = "Sorry chommie!";
@@ -178,14 +187,20 @@ function showNoOutcome() {
     finalNoMobile.classList.add("visible");
 }
 
-noBtn.addEventListener("click", (e) => {
+function handleNoTap(e) {
     e.preventDefault();
+    const now = Date.now();
+    if (now - noTapHandledAt < 500) return;
+    noTapHandledAt = now;
     showNoOutcome();
-});
-noBtn.addEventListener("touchend", (e) => {
-    e.preventDefault();
-    showNoOutcome();
-}, { passive: false });
+}
+
+const noTapEl = noBtnTap || noBtn;
+if (noTapEl) {
+    noTapEl.addEventListener("touchstart", handleNoTap, { passive: false });
+    noTapEl.addEventListener("touchend", handleNoTap, { passive: false });
+    noTapEl.addEventListener("click", handleNoTap);
+}
 
 // YES is clicked
 
