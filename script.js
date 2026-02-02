@@ -169,15 +169,23 @@ function growYesButton() {
     yesBtn.style.transform = `scale(${yesScale})`;
 }
 
-// Mobile only: No is clicked → show "Sorry chommie" + evil_laugh.gif + date
-noBtn.addEventListener("click", () => {
+// Mobile only: No tapped/clicked → show "Sorry chommie" + evil_laugh.gif + date
+function showNoOutcome() {
     if (!isMobile()) return;
-
     title.textContent = "Sorry chommie!";
     catImg.style.display = "none";
     buttons.style.display = "none";
     finalNoMobile.classList.add("visible");
+}
+
+noBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    showNoOutcome();
 });
+noBtn.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    showNoOutcome();
+}, { passive: false });
 
 // YES is clicked
 

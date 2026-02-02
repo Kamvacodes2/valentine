@@ -240,6 +240,8 @@ display: inline-block;
 
     .no-btn {
         cursor: pointer;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .final-no-message {
