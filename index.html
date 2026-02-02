@@ -1,46 +1,56 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Valentine Letter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Aldrich&family=Pixelify+Sans:wght@400..700&display=swap"
-      rel="stylesheet"
-    />
-    <title>Document</title>
-  </head>
-  <body>
-    <!-- Envelope Screen -->
-    <div id="envelope-container">
-      <img src="envelope.png" alt="Envelope" id="envelope" />
-      <p>♡ Letter for You ♡</p>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Valentine Letter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Letter Screen -->
-    <div id="letter-container">
-      <div class="letter-window">
-        <h1 id="letter-title">Will you be my Valentine?</h1>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Pixelify+Sans:wght@400..700&display=swap"
+    rel="stylesheet" />
+  <title>Document</title>
+</head>
 
-        <img src="cat_heart.gif" class="cat" id="letter-cat" />
+<body>
+  <!-- Envelope Screen -->
+  <div id="envelope-container">
+    <img src="envelope.png" alt="Envelope" id="envelope" />
+    <p>♡ Letter for you MaNcama♡</p>
+  </div>
 
-        <div class="buttons" id="letter-buttons">
-          <img src="yes.png" class="btn yes-btn" alt="Yes" />
+  <!-- Letter Screen -->
+  <div id="letter-container">
+    <div class="letter-window">
+      <h1 id="letter-title">Will you be my Valentine sthandwa sam?</h1>
 
-          <div class="no-wrapper">
-            <img src="no.png" class="btn no-btn" alt="No" />
-          </div>
+      <img src="couple_dance.gif" class="cat" id="letter-cat" />
+
+      <div class="buttons" id="letter-buttons">
+        <img src="yes.png" class="btn yes-btn" alt="Yes" />
+
+        <div class="no-wrapper">
+          <img src="no.png" class="btn no-btn" alt="No" />
         </div>
+      </div>
 
-        <p id="final-text" class="final-text" style="display: none">
-          <strong>Valentine Date:</strong> Meow Restaurant at 7pm. Dress fancy!
+      <p id="final-text" class="final-text" style="display: none">
+        <strong>Valentine Date:</strong> Buitengeluk Broadacres at 11 a.m . Dress fancy!
+      </p>
+
+      <!-- Mobile only: shown when user taps No -->
+      <div id="final-no-mobile" class="final-no-mobile">
+        <p class="final-no-message">Youre my Valentine whether you like it or not</p>
+        <img src="evil_laugh.gif" alt="" class="final-no-gif" />
+        <p class="final-no-date">
+          <strong>Valentine Date:</strong> Buitengeluk Broadacres at 11 a.m . Dress fancy!
         </p>
       </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+  </div>
+  <script src="script.js"></script>
+</body>
+
 </html>
