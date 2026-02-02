@@ -34,16 +34,21 @@ function applyMobileBehavior() {
 window.addEventListener("resize", applyMobileBehavior);
 applyMobileBehavior();
 
-// Click Envelope
-
-envelope.addEventListener("click", () => {
+// Open letter (envelope tap/click)
+function openLetter() {
     envelope.style.display = "none";
     letter.style.display = "flex";
-
     setTimeout(() => {
         document.querySelector(".letter-window").classList.add("open");
     }, 50);
-});
+}
+
+envelope.addEventListener("click", openLetter);
+// Mobile: touch often doesn't fire click reliably — handle tap directly
+envelope.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    openLetter();
+}, { passive: false });
 
 // --- NO button: drifts away from mouse, stays inside letter window, unclickable ---
 let noOffsetX = 0;

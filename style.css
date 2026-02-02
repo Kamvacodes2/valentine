@@ -11,7 +11,16 @@ body {
 /* Envelope Screen */
 #envelope-container {
     text-align: center;
-    cursor:pointer;
+    cursor: pointer;
+    /* Mobile: reliable tap, no 300ms delay, good touch target */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    padding: 20px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes pulse {
@@ -26,10 +35,13 @@ body {
     }
 }
 
-#envelope{
+#envelope {
     width: 200px;
     animation: pulse 1.5s infinite;
     cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    pointer-events: auto;
 }
 
 #letter-container{
