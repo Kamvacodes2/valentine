@@ -17,7 +17,7 @@
 <body>
   <!-- Envelope Screen: full-screen tap area so mobile always registers -->
   <div id="envelope-container">
-    <button type="button" id="envelope-tap" class="envelope-tap" aria-label="Open letter">
+    <button type="button" id="envelope-tap" class="envelope-tap" aria-label="Open letter" onclick="if(window.openLetter)window.openLetter();return false;">
       <img src="envelope.png" alt="Envelope" id="envelope" />
       <p>♡ Letter for you MaNcama♡</p>
     </button>

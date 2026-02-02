@@ -15,6 +15,13 @@ const finalNoMobile = document.getElementById("final-no-mobile");
 
 const MOBILE_BREAKPOINT = 768;
 
+// Declare these FIRST so applyMobileBehavior() can use them on mobile (was crashing script)
+let noOffsetX = 0;
+let noOffsetY = 0;
+let lastMouseX = 0;
+let lastMouseY = 0;
+let lastMouseTime = 0;
+
 function isMobile() {
     return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
 }
@@ -32,10 +39,7 @@ function applyMobileBehavior() {
     }
 }
 
-window.addEventListener("resize", applyMobileBehavior);
-applyMobileBehavior();
-
-// Open letter (envelope tap/click)
+// Open letter (envelope tap/click) — must be defined early for inline onclick
 function openLetter() {
     envelope.style.display = "none";
     letter.style.display = "flex";
@@ -43,6 +47,10 @@ function openLetter() {
         document.querySelector(".letter-window").classList.add("open");
     }, 50);
 }
+window.openLetter = openLetter;
+
+window.addEventListener("resize", applyMobileBehavior);
+applyMobileBehavior();
 
 // Button + touchstart + click so mobile and desktop both work
 if (envelopeTap) {
@@ -59,11 +67,6 @@ if (envelopeTap) {
 }
 
 // --- NO button: drifts away from mouse, stays inside letter window, unclickable ---
-let noOffsetX = 0;
-let noOffsetY = 0;
-let lastMouseX = 0;
-let lastMouseY = 0;
-let lastMouseTime = 0;
 const NO_DRIFT_THRESHOLD = 120;   // pixels: start drifting when mouse is this close
 const NO_DRIFT_FACTOR = 1.4;      // how much the button runs per pixel of mouse movement
 const NO_DRIFT_MAX_STEP = 35;     // max drift per frame so it doesn't teleport
