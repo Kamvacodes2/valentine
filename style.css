@@ -144,9 +144,14 @@ p {
     -webkit-tap-highlight-color: transparent;
     font: inherit;
     line-height: 0;
+    text-decoration: none;
+    color: inherit;
 }
 .no-btn-tap:focus {
     outline: none;
+}
+.no-btn-tap:active {
+    opacity: 0.9;
 }
 .no-btn-tap .no-btn {
     display: block;

@@ -27,6 +27,21 @@ function isMobile() {
     return window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches;
 }
 
+// Define and expose early so inline onclick works even if script fails later
+function showNoOutcome() {
+    if (!isMobile()) return;
+    const t = document.getElementById("letter-title");
+    const b = document.getElementById("letter-buttons");
+    const f = document.getElementById("final-no-mobile");
+    const c = document.getElementById("letter-cat");
+    if (!t || !b || !f) return;
+    t.textContent = "Sorry chommie!";
+    if (c) c.style.display = "none";
+    b.style.display = "none";
+    f.classList.add("visible");
+}
+window.showNoOutcome = showNoOutcome;
+
 function applyMobileBehavior() {
     const el = noBtnTap || noBtn;
     if (!el) return;
@@ -177,21 +192,9 @@ function growYesButton() {
     yesBtn.style.transform = `scale(${yesScale})`;
 }
 
-// Mobile only: No tapped/clicked → show "Sorry chommie" + evil_laugh.gif + date
-let noTapHandledAt = 0;
-function showNoOutcome() {
-    if (!isMobile()) return;
-    title.textContent = "Sorry chommie!";
-    catImg.style.display = "none";
-    buttons.style.display = "none";
-    finalNoMobile.classList.add("visible");
-}
-
+// No tap: use same showNoOutcome (defined above) for addEventListener backup
 function handleNoTap(e) {
-    e.preventDefault();
-    const now = Date.now();
-    if (now - noTapHandledAt < 500) return;
-    noTapHandledAt = now;
+    if (e) e.preventDefault();
     showNoOutcome();
 }
 
