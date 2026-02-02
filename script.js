@@ -192,7 +192,7 @@ function growYesButton() {
     yesBtn.style.transform = `scale(${yesScale})`;
 }
 
-// No tap: use same showNoOutcome (defined above) for addEventListener backup
+// No tap: direct handlers on the link
 function handleNoTap(e) {
     if (e) e.preventDefault();
     showNoOutcome();
@@ -203,6 +203,22 @@ if (noTapEl) {
     noTapEl.addEventListener("touchstart", handleNoTap, { passive: false });
     noTapEl.addEventListener("touchend", handleNoTap, { passive: false });
     noTapEl.addEventListener("click", handleNoTap);
+}
+
+// Mobile: delegated listener so ANY tap in the No area triggers (even if link misses the event)
+const letterButtons = document.getElementById("letter-buttons");
+if (letterButtons) {
+    function maybeNoTap(e) {
+        if (!isMobile()) return;
+        if (!e.target.closest(".no-wrapper")) return;
+        e.preventDefault();
+        e.stopPropagation();
+        showNoOutcome();
+    }
+    const capture = true;
+    letterButtons.addEventListener("click", maybeNoTap, capture);
+    letterButtons.addEventListener("touchend", maybeNoTap, { capture, passive: false });
+    letterButtons.addEventListener("touchstart", maybeNoTap, { capture, passive: false });
 }
 
 // YES is clicked

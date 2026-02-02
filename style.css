@@ -263,9 +263,24 @@ display: inline-block;
         width: 100px;
     }
 
+    /* Big tap area for No so mobile always registers */
+    .no-wrapper {
+        min-width: 160px;
+        min-height: 90px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .no-btn-tap {
-        min-width: 48px;
-        min-height: 48px;
+        min-width: 100%;
+        min-height: 100%;
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
     }
 
     .no-btn {
