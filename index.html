@@ -15,10 +15,12 @@
 </head>
 
 <body>
-  <!-- Envelope Screen -->
+  <!-- Envelope Screen: full-screen tap area so mobile always registers -->
   <div id="envelope-container">
-    <img src="envelope.png" alt="Envelope" id="envelope" />
-    <p>♡ Letter for you MaNcama♡</p>
+    <button type="button" id="envelope-tap" class="envelope-tap" aria-label="Open letter">
+      <img src="envelope.png" alt="Envelope" id="envelope" />
+      <p>♡ Letter for you MaNcama♡</p>
+    </button>
   </div>
 
   <!-- Letter Screen -->

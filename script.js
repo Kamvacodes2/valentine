@@ -1,5 +1,6 @@
 // Elements
 const envelope = document.getElementById("envelope-container");
+const envelopeTap = document.getElementById("envelope-tap");
 const letter = document.getElementById("letter-container");
 const noBtn = document.querySelector(".no-btn");
 const noWrapper = document.querySelector(".no-wrapper");
@@ -43,12 +44,19 @@ function openLetter() {
     }, 50);
 }
 
-envelope.addEventListener("click", openLetter);
-// Mobile: touch often doesn't fire click reliably — handle tap directly
-envelope.addEventListener("touchend", (e) => {
-    e.preventDefault();
-    openLetter();
-}, { passive: false });
+// Button + touchstart + click so mobile and desktop both work
+if (envelopeTap) {
+    envelopeTap.addEventListener("click", (e) => {
+        e.preventDefault();
+        openLetter();
+    });
+    envelopeTap.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        openLetter();
+    }, { passive: false });
+} else {
+    envelope.addEventListener("click", openLetter);
+}
 
 // --- NO button: drifts away from mouse, stays inside letter window, unclickable ---
 let noOffsetX = 0;
